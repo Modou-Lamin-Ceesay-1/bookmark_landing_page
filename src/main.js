@@ -18,40 +18,74 @@ tabs.forEach((tab, index) => {
     tab.classList.add("border-b-2", "tab-red");
     tab.classList.remove("text-gray-500");
 
-  
     tab.classList.add("border-b-2", "tab-red");
     tab.classList.remove("text-gray-500");
   });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Get all FAQ toggle buttons
+  const faqToggles = document.querySelectorAll(".faq-toggle");
 
-// FAQ TOGGLE SECTION
-function toggleFAQ(this) {
-  // Toggle the answer visibility
-  const answer = element.nextElementSibling;
-  answer.classList.toggle("hidden");
+  // Add click event listener to each toggle
+  faqToggles.forEach((toggle) => {
+    toggle.addEventListener("click", function () {
+      // Toggle the visibility of the content
+      const content = this.nextElementSibling;
+      content.classList.toggle("hidden");
 
-  // Rotate the arrow icon
-  const arrow = element.querySelector("svg");
-  arrow.classList.toggle("rotate-180");
+      // Rotate the chevron icon
+      const chevron = this.querySelector(".faq-chevron");
+      if (content.classList.contains("hidden")) {
+        chevron.style.transform = "rotate(0deg)";
+      } else {
+        chevron.style.transform = "rotate(180deg)";
+      }
 
+      // Optional: Close other FAQs when opening a new one
+      faqToggles.forEach((otherToggle) => {
+        if (otherToggle !== toggle) {
+          const otherContent = otherToggle.nextElementSibling;
+          const otherChevron = otherToggle.querySelector(".faq-chevron");
 
-  // Optional: close other open FAQs
-  const allAnswers = document.querySelectorAll(".border-t");
-  const allArrows = document.querySelectorAll("button svg");
-
-  allAnswers.forEach((item) => {
-    if (item !== answer && !item.classList.contains("hidden")) {
-      item.classList.add("hidden");
-    }
+          if (!otherContent.classList.contains("hidden")) {
+            otherContent.classList.add("hidden");
+            otherChevron.style.transform = "rotate(0deg)";
+          }
+        }
+      });
+    });
   });
+});
 
-  allArrows.forEach((item) => {
-    if (item !== arrow && item.classList.contains("rotate-180")) {
-      item.classList.remove("rotate-180");
-    }
-  });
-}
+
+// // FAQ TOGGLE SECTION
+// function toggleFAQ(element) {
+//   // Toggle the answer visibility
+//   const answer = element.nextElementSibling;
+//   answer.classList.toggle("hidden");
+
+//   // Rotate the arrow icon
+//   const arrow = element.querySelector("svg");
+//   arrow.classList.toggle("rotate-180");
+
+
+//   // Optional: close other open FAQs
+//   const allAnswers = document.querySelectorAll(".border-t");
+//   const allArrows = document.querySelectorAll("button svg");
+
+//   allAnswers.forEach((item) => {
+//     if (item !== answer && !item.classList.contains("hidden")) {
+//       item.classList.add("hidden");
+//     }
+//   });
+
+//   allArrows.forEach((item) => {
+//     if (item !== arrow && item.classList.contains("rotate-180")) {
+//       item.classList.remove("rotate-180");
+//     }
+//   });
+// }
 
 
 // Email Validation for Newsletter Form
