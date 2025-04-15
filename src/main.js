@@ -26,7 +26,7 @@ tabs.forEach((tab, index) => {
 
 
 // FAQ TOGGLE SECTION
-function toggleFAQ(element) {
+function toggleFAQ(this) {
   // Toggle the answer visibility
   const answer = element.nextElementSibling;
   answer.classList.toggle("hidden");
